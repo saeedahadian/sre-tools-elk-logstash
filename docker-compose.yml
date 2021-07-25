@@ -3,6 +3,8 @@ x-logstash-common: &logstash-common
   restart: unless-stopped
   expose:
     - "5044"
+  environment:
+    - ELASTICHOST=${ELASTICHOST}
   volumes:
       - ./configs/pipeline:/usr/share/logstash/pipeline
       - ./configs/settings:/usr/share/logstash/config
