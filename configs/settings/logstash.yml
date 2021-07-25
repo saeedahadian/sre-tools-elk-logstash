@@ -1,0 +1,7 @@
+# Settings file in YAML
+
+node:
+  name: monitoring
+
+log:
+  level: info

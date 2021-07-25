@@ -1,0 +1,3 @@
+# Exclude the env files.
+.env
+.env.fish

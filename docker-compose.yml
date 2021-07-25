@@ -1,0 +1,45 @@
+x-logstash-common: &logstash-common
+  image: ${LOGSTASH_IMAGE}
+  restart: unless-stopped
+  expose:
+    - "5044"
+  volumes:
+      - ./configs/pipeline:/usr/share/logstash/pipeline
+      - ./configs/settings:/usr/share/logstash/config
+
+services:
+  logstash-1:
+    <<: *logstash-common
+    hostname: logstash-1
+    container_name: logstash-1
+
+  logstash-2:
+    <<: *logstash-common
+    hostname: logstash-2
+    container_name: logstash-2
+
+  logstash-3:
+    <<: *logstash-common
+    hostname: logstash-3
+    container_name: logstash-3
+
+  logstash-4:
+    <<: *logstash-common
+    hostname: logstash-4
+    container_name: logstash-4
+
+  logstash-load-balancer:
+    image: ${NGINX_IMAGE}
+    hostname: nginx
+    container_name: logstash-load-blancer
+    restart: unless-stopped
+    volumes:
+      - ./configs/nginx.conf:/etc/nginx/nginx.conf:ro
+      #- ./logs/nginx:/var/log/nginx
+    ports:
+      - "${OUTBOUND_PORT}:5044"
+    depends_on:
+      - logstash-1
+      - logstash-2
+      - logstash-3
+      - logstash-4

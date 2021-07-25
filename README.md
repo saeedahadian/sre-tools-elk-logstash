@@ -3,6 +3,20 @@
 Logstash is a useful tool to process and extract informations from
 simple logs.
 
+## Environment Variables
+
+Before running the compose file, use one of `.env.sample` or 
+`.env.fish.sample` files to initialize some values that are required for
+the services to work properly. You can source your environment with
+these commands:
+
+```bash
+. .env
+
+# In fish shell:
+. .env.fish
+```
+
 ## Configuration
 
 There are 2 types of configurations in Logstash:
