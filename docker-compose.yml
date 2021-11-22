@@ -17,6 +17,8 @@ services:
       - logstash-data-01:/usr/share/logstash/data
       - ./configs/pipeline:/usr/share/logstash/pipeline
       - ./configs/settings:/usr/share/logstash/config
+    networks:
+      - elastic-net
 
   logstash-02:
     <<: *logstash-common
@@ -28,9 +30,15 @@ services:
       - logstash-data-02:/usr/share/logstash/data
       - ./configs/pipeline:/usr/share/logstash/pipeline
       - ./configs/settings:/usr/share/logstash/config
+    networks:
+      - elastic-net
 
 volumes:
   logstash-data-01:
     name: logstash-data-01
   logstash-data-02:
     name: logstash-data-02
+
+networks:
+  elastic-net:
+    external: true
