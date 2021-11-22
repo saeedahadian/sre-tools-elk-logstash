@@ -1,5 +1,5 @@
 x-logstash-common: &logstash-common
-image: logstash/logstash:${VERSION}
+  image: logstash/logstash:${VERSION}
   restart: unless-stopped
   expose:
     - "5044"
@@ -14,9 +14,9 @@ services:
     ports:
       - "${LOGSTASH01_OUTBOUND_PORT}:5044"
     volumes:
-    - logstash-data-01:/usr/share/logstash/data
-    - ./configs/pipeline:/usr/share/logstash/pipeline
-    - ./configs/settings:/usr/share/logstash/config
+      - logstash-data-01:/usr/share/logstash/data
+      - ./configs/pipeline:/usr/share/logstash/pipeline
+      - ./configs/settings:/usr/share/logstash/config
 
   logstash-02:
     <<: *logstash-common
@@ -25,9 +25,9 @@ services:
     ports:
       - "${LOGSTASH02_OUTBOUND_PORT}:5044"
     volumes:
-    - logstash-data-02:/usr/share/logstash/data
-    - ./configs/pipeline:/usr/share/logstash/pipeline
-    - ./configs/settings:/usr/share/logstash/config
+      - logstash-data-02:/usr/share/logstash/data
+      - ./configs/pipeline:/usr/share/logstash/pipeline
+      - ./configs/settings:/usr/share/logstash/config
 
 volumes:
   logstash-data-01:
