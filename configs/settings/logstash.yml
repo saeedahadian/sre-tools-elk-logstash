@@ -5,3 +5,7 @@ node:
 
 log:
   level: info
+
+queue:
+  type: persisted
+  max_bytes: 5g
