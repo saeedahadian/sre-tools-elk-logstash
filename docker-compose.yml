@@ -1,6 +1,7 @@
 x-logstash-common: &logstash-common
   image: logstash/logstash:${VERSION}
   restart: unless-stopped
+  env_file: .env
   expose:
     - "5044"
   environment:
@@ -14,6 +15,7 @@ services:
     ports:
       - "${LOGSTASH01_OUTBOUND_PORT}:5044"
     volumes:
+      - certs:$CERTS_DIR
       - logstash-data-01:/usr/share/logstash/data
       - ./configs/pipeline:/usr/share/logstash/pipeline
       - ./configs/settings:/usr/share/logstash/config
@@ -27,6 +29,7 @@ services:
     ports:
       - "${LOGSTASH02_OUTBOUND_PORT}:5044"
     volumes:
+      - certs:$CERTS_DIR
       - logstash-data-02:/usr/share/logstash/data
       - ./configs/pipeline:/usr/share/logstash/pipeline
       - ./configs/settings:/usr/share/logstash/config
@@ -34,6 +37,9 @@ services:
       - elastic-net
 
 volumes:
+  certs:
+    external: true
+    name: elastic-certs
   logstash-data-01:
     name: logstash-data-01
   logstash-data-02:
