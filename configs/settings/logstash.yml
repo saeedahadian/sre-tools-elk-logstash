@@ -1,11 +1,16 @@
 # Settings file in YAML
 
-node:
-  name: monitoring
+node.name: monitoring
 
-log:
-  level: info
+log.level: info
 
-queue:
-  type: persisted
-  max_bytes: 5g
+queue.type: persisted
+queue.max_bytes: 5g
+
+xpack.management.enabled: false
+xpack.management.elasticsearch.hosts: "${ELASTICHOST}"
+xpack.management.elasticsearch.username: "logstash_admin_user"
+xpack.management.elasticsearch.password: "${LOGSTASH_ADMIN_USER_PASSWORD}"
+xpack.management.elasticsearch.ssl.certificate_authority: "${CERTS_DIR}/kibana/elasticsearch-ca.pem"
+xpack.management.logstash.poll_interval: 5s
+xpack.management.pipeline.id: ["beats"]
