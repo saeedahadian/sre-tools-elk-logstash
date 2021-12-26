@@ -1,5 +1,5 @@
 x-logstash-common: &logstash-common
-  image: logstash/logstash:${VERSION}
+  image: logstash/logstash:${LOGSTASH_VERSION}
   restart: unless-stopped
   env_file: .env
   expose:
@@ -35,6 +35,20 @@ services:
       - ./configs/settings:/usr/share/logstash/config
     networks:
       - elastic-net
+
+  #logstash-load-balancer:
+  #  image: nginx:${NGINX_IMAGE}
+  #  hostname: nginx
+  #  container_name: logstash-load-blancer
+  #  restart: unless-stopped
+  #  volumes:
+  #    - ./configs/nginx.conf:/etc/nginx/nginx.conf:ro
+  #    - ./logs/nginx:/var/log/nginx
+  #  ports:
+  #    - "${NGINX_OUTBOUND_PORT}:5044"
+  #  depends_on:
+  #    - logstash-01
+  #    - logstash-02
 
 volumes:
   certs:
