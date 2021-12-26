@@ -56,6 +56,8 @@ There are 2 ways to implement load-balancing on Logstash services:
 A good way to load-balance your requests between different instances of Logstash is to run separate instances of Logstash on different ports and use filebeat's inherent load-balance feature to balance requests between these instances. Your filebeat configuration should be like this:
 
 ```yaml
+# filebeat.yml
+
 output.logstash:
   enabled: true
   hosts: 
@@ -77,6 +79,8 @@ Another way to balance requests is to use an NginX instance besides logstash ser
 NginX configuration with `stream` block should be something like this:
 
 ```conf
+# /etc/nginx.conf
+
 stream {
     upstream logstash {
         server logstash-1:5044;
