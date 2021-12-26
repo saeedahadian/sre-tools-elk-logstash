@@ -76,7 +76,7 @@ Another way to balance requests is to use an NginX instance besides logstash ser
 
 NginX configuration with `stream` block should be something like this:
 
-```
+```conf
 stream {
     upstream logstash {
         server logstash-1:5044;
