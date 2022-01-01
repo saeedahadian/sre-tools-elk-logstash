@@ -25,11 +25,13 @@ output {
     cacert => "${CERTS_DIR}/kibana/elasticsearch-ca.pem"  # CERTIFICATE SHOULD BE HERE!
   }
 
-  stdout {  }
+  # stdout {  }
 }
 ```
 
-Then everything is ready and you run the service.
+While configuring the _output_ section, **be careful not to leave the `stdout {  }` section uncommented.** It causes the size of the container to grow exponentially beyond control. The `stdout { }` should only be used for the purpose of debugging and only temporarily.
+
+Now everything is ready and you can run the service.
 
 ```bash
 docker-compose up -d
